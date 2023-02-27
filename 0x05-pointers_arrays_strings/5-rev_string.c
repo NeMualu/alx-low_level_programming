@@ -6,26 +6,17 @@
  *
  *@s: this is the pointer that point to a string
  */
-void rev_string(char *s)
-{
-	int a, len;
+void rev_string(char *s){
+	    // declare variable
+    int i, len, temp;
+    len = strlen(str1); // use strlen() to get the length of str string
 
-	char *begin, *end = s;
-
-	for (a = 0; s[a] != '\0' && s[a + 1] != '\0'; a++)
-	{
-		end++;
-	}
-	len = a + 1;
-	begin = s;
-	for (a = 0; a < len / 2; a++)
-	{
-		char x;
-		x = *end;
-		*end = *begin;
-		*begin = x;
-		begin++;
-		end--;
-	}
-	end[len + 1] = '\0';
+    // use for loop to iterate the string
+    for (i = 0; i < len/2; i++)
+    {
+        // temp variable use to temporary hold the string
+        temp = str1[i];
+        str1[i] = str1[len - i - 1];
+        str1[len - i - 1] = temp;
+    }  
 }
