@@ -1,48 +1,33 @@
-0x0C. C - More malloc, free
-===========================
+0x0D. C - Preprocessor
+======================
 
 -   By NeMualu
--   Weight: 1
--   Ongoing second chance project - started 09-23-2021, must end by 09-25-2021 (in about 16 hours) - you're done with 0% of tasks.
--   QA review fully automated.
 
-#### In a nutshell...
-
--   **Auto QA review:** 0.0/36 mandatory & 0.0/21 optional
--   **Altogether:**  **0.0%**
-    -   Mandatory: 0.0%
-    -   Optional: 0.0%
-    -   Calculation:  0.0% + (0.0% * 0.0%)  == **0.0%**
-
-Concepts
---------
-
-*For this project, students are expected to look at this concept:*
-
--   [Automatic and dynamic allocation, malloc and free](https://alx-intranet.hbtn.io/concepts/62)
 
 Resources
 ---------
 
 **Read or watch**:
 
--   [Do I cast the result of malloc?](https://alx-intranet.hbtn.io/rltoken/uKhvfzpF3v8Be10NCZlQtA "Do I cast the result of malloc?")
-
-**man or help**:
-
--   `exit (3)`
--   `calloc`
--   `realloc`
+-   [Understanding C program Compilation Process](https://alx-intranet.hbtn.io/rltoken/73Xp4zJlc-orfeEzmlYVDg "Understanding C program Compilation Process")
+-   [Object-like Macros](https://alx-intranet.hbtn.io/rltoken/kaqIw352MSJ8xoi1xU09ZA "Object-like Macros")
+-   [Macro Arguments](https://alx-intranet.hbtn.io/rltoken/wcQZzunlgjepxExZFc2ORQ "Macro Arguments")
+-   [Pre Processor Directives in C](https://alx-intranet.hbtn.io/rltoken/S4zfCHzg82fUAxdt8_SaZQ "Pre Processor Directives in C")
+-   [The C Preprocessor](https://alx-intranet.hbtn.io/rltoken/G33GiOIZofiIN4Tx9_acbQ "The C Preprocessor")
+-   [Standard Predefined Macros](https://alx-intranet.hbtn.io/rltoken/0OYhpL2cJfsIMBWhTuZsAA "Standard Predefined Macros")
+-   [include guard](https://alx-intranet.hbtn.io/rltoken/oF2vgIZNePdU965jCEZLHA "include guard")
+-   [Common Predefined Macros](https://alx-intranet.hbtn.io/rltoken/ROl5xAMKX-JpenEqmf7FnQ "Common Predefined Macros")
 
 Learning Objectives
 -------------------
 
-At the end of this project, you are expected to be able to [explain to anyone](https://alx-intranet.hbtn.io/rltoken/UzyOEQw26ytlKDLQq7AGXw "explain to anyone"), **without the help of Google**:
+At the end of this project, you are expected to be able to [explain to anyone](https://alx-intranet.hbtn.io/rltoken/OnMlvyxq0Mzr-7GHRPI9tQ "explain to anyone"), **without the help of Google**:
 
 ### General
 
--   How to use the `exit` function
--   What are the functions `calloc` and `realloc` from the standard library and how to use them
+-   What are macros and how to use them
+-   What are the most common predefined macros
+-   How to include guard your header files
 
 Requirements
 ------------
@@ -60,139 +45,190 @@ Requirements
 -   You are allowed to use [_putchar](https://github.com/holbertonschool/_putchar.c/blob/master/_putchar.c "_putchar")
 -   You don't have to push `_putchar.c`, we will use our file. If you do it won't be taken into account
 -   In the following examples, the `main.c` files are shown as examples. You can use them to test your functions, but you don't have to push them to your repo (if you do we won't take them into account). We will use our own `main.c` files at compilation. Our `main.c` files might be different from the one shown in the examples
--   The prototypes of all your functions and the prototype of the function `_putchar` should be included in your header file called `main.h`
 -   Don't forget to push your header file
+-   All your header files should be include guarded
 
---
+Tasks
+-----
 
-### 4\. _realloc
+### 0\. Object-like Macro
 
-#advanced
+mandatory
 
-Score: 0.00% (Checks completed: 0.00%)
-
-Write a function that reallocates a memory block using `malloc` and `free`
-
--   Prototype: `void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);`
--   where `ptr` is a pointer to the memory previously allocated with a call to `malloc`: `malloc(old_size)`
--   `old_size` is the size, in bytes, of the allocated space for `ptr`
--   and `new_size` is the new size, in bytes of the new memory block
--   The contents will be copied to the newly allocated space, in the range from the start of `ptr` up to the minimum of the old and new sizes
--   If `new_size` > `old_size`, the "added" memory should not be initialized
--   If `new_size` == `old_size` do not do anything and return `ptr`
--   If `ptr` is `NULL`, then the call is equivalent to `malloc(new_size)`, for all values of `old_size` and `new_size`
--   If `new_size` is equal to zero, and `ptr` is not `NULL`, then the call is equivalent to `free(ptr)`. Return `NULL`
--   Don't forget to free `ptr` when it makes sense
-
-FYI: The standard library provides a different function: `realloc`. Run `man realloc` to learn more.
+Create a header file that defines a macro named `SIZE` as an abbreviation for the token `1024`.
 
 ```
-julien@ubuntu:~/0x0b. more malloc, free$ cat 100-main.c
-#include "main.h"
+julien@ubuntu:~/0x0c. macro, structures$ cat 0-main.c
+#include "0-object_like_macro.h"
+#include "0-object_like_macro.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 /**
- * simple_print_buffer - prints buffer in hexa
- * @buffer: the address of memory to print
- * @size: the size of the memory to print
- *
- * Return: Nothing.
- */
-void simple_print_buffer(char *buffer, unsigned int size)
-{
-    unsigned int i;
-
-    i = 0;
-    while (i < size)
-    {
-        if (i % 10)
-        {
-            printf(" ");
-        }
-        if (!(i % 10) && i)
-        {
-            printf("\n");
-        }
-        printf("0x%02x", buffer[i]);
-        i++;
-    }
-    printf("\n");
-}
-
-/**
- * main - check the code for
+ * main - check the code
  *
  * Return: Always 0.
  */
 int main(void)
 {
-    char *p;
-    int i;
+    int s;
 
-    p = malloc(sizeof(char) * 10);
-    p = _realloc(p, sizeof(char) * 10, sizeof(char) * 98);
-    i = 0;
-    while (i < 98)
-    {
-        p[i++] = 98;
-    }
-    simple_print_buffer(p, 98);
-    free(p);
+    s = 98 + SIZE;
+    printf("%d\n", s);
     return (0);
 }
-julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 100-main.c 100-realloc.c -o 100-realloc
-julien@ubuntu:~/0x0b. more malloc, free$ ./100-realloc
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-0x62 0x62 0x62 0x62 0x62 0x62 0x62 0x62
-julien@ubuntu:~/0x0b. more malloc, free$
+julien@ubuntu:~/0x0c. macro, structures$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 0-main.c -o a
+julien@ubuntu:~/0x0c. macro, structures$ ./a
+1122
+julien@ubuntu:~/0x0c. macro, structures$
 
 ```
 
 **Repo:**
 
 -   GitHub repository: `alx-low_level_programming`
--   Directory: `0x0C-more_malloc_free`
--   File: `100-realloc.c`
+-   Directory: `0x0D-preprocessor`
+-   File: `0-object_like_macro.h`
 
-### 5\. We must accept finite disappointment, but never lose infinite hope
+### 1\. Pi
 
-#advanced
+mandatory
 
-Score: 0.00% (Checks completed: 0.00%)
-
-Write a program that multiplies two positive numbers.
-
--   Usage: `mul num1 num2`
--   `num1` and `num2` will be passed in base 10
--   Print the result, followed by a new line
--   If the number of arguments is incorrect, print `Error`, followed by a new line, and exit with a status of `98`
--   `num1` and `num2` should only be composed of digits. If not, print `Error`, followed by a new line, and exit with a status of `98`
--   You are allowed to use more than 5 functions in your file
-
-You can use `bc` (`man bc`) to check your results.
+Create a header file that defines a macro named `PI` as an abbreviation for the token `3.14159265359`.
 
 ```
-julien@ubuntu:~/0x0b. more malloc, free$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 101-mul.c _putchar.c -o 101-mul
-julien@ubuntu:~/0x0b. more malloc, free$ ./101-mul 10 98
-980
-julien@ubuntu:~/0x0b. more malloc, free$ ./101-mul 235234693269436436223446526546334576437634765378653875874687649698659586695898579 28658034365084365083426083109679137608216408631430814308651084650816406134060831608310853086103769013709675067130586570832760732096730978014607369739567864508634086304807450973045703428580934825098342095832409850394285098342509834209583425345267413639235755891879970464524226159074760914989935413350556875770807019893069201247121855122836389417022552166316010013074258781583143870461182707893577849408672040555089482160343085482612348145322689883025225988799452329290281169927532160590651993511788518550547570284574715925006962738262888617840435389140329668772644708
-6741363923575589187997046452422615907476091498993541335055687577080701989306920124712185512283638941702255216631601001307425878158314387046118270789357784940867204055508948216034308548261234814532268988302522598879945232929028116992753216059081057377926651337612618248332113256902485974371969385156015068813868274000683912187818601667058605418678284322237297213673482412392922068159291496274311170208689056585352782844484721140846367741649962638649229509281867896067208474178402156294978940712959518351846413859141792380853313812015295333546716634344284086426775480775747808150030732119704867805688704303461042373101473485092019906795014369069932
-julien@ubuntu:~/0x0b. more malloc, free$
+julien@ubuntu:~/0x0c. macro, structures$ cat 1-main.c
+#include "1-pi.h"
+#include "1-pi.h"
+#include <stdio.h>
+
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+    float a;
+    float r;
+
+    r = 98;
+    a = PI * r * r;
+    printf("%.3f\n", a);
+    return (0);
+}
+julien@ubuntu:~/0x0c. macro, structures$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 1-main.c -o b
+julien@ubuntu:~/0x0c. macro, structures$ ./b
+30171.855
+julien@ubuntu:~/0x0c. macro, structures$
 
 ```
 
 **Repo:**
 
 -   GitHub repository: `alx-low_level_programming`
--   Directory: `0x0C-more_malloc_free`
--   File: `101-mul.c`
+-   Directory: `0x0D-preprocessor`
+-   File: `1-pi.h`
+
+### 2\. File name
+
+mandatory
+
+Write a program that prints the name of the file it was compiled from, followed by a new line.
+
+-   You are allowed to use the standard library
+
+```
+julien@ubuntu:~/0x0c. macro, structures$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 2-main.c -o c
+julien@ubuntu:~/0x0c. macro, structures$ ./c
+2-main.c
+julien@ubuntu:~/0x0c. macro, structures$ cp 2-main.c 02-main.c
+julien@ubuntu:~/0x0c. macro, structures$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 02-main.c -o cc
+julien@ubuntu:~/0x0c. macro, structures$ ./cc
+02-main.c
+julien@ubuntu:~/0x0c. macro, structures$
+
+```
+
+**Repo:**
+
+-   GitHub repository: `alx-low_level_programming`
+-   Directory: `0x0D-preprocessor`
+-   File: `2-main.c`
+
+### 3\. Function-like macro
+
+mandatory
+
+Write a function-like macro `ABS(x)` that computes the absolute value of a number `x`.
+
+```
+julien@ubuntu:~/0x0c. macro, structures$ cat 3-main.c
+#include <stdio.h>
+#include "3-function_like_macro.h"
+#include "3-function_like_macro.h"
+
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+    int i;
+    int j;
+
+    i = ABS(-98) * 10;
+    j = ABS(98) * 10;
+    printf("%d, %d\n", i, j);
+    return (0);
+}
+julien@ubuntu:~/0x0c. macro, structures$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 3-main.c -o d
+julien@ubuntu:~/0x0c. macro, structures$ ./d
+980, 980
+julien@ubuntu:~/0x0c. macro, structures$
+
+```
+
+**Repo:**
+
+-   GitHub repository: `alx-low_level_programming`
+-   Directory: `0x0D-preprocessor`
+-   File: `3-function_like_macro.h`
+
+### 4\. SUM
+
+mandatory
+
+Write a function-like macro `SUM(x, y)` that computes the sum of the numbers `x` and `y`.
+
+```
+julien@ubuntu:~/0x0c. macro, structures$ cat 4-main.c
+#include <stdio.h>
+#include "4-sum.h"
+#include "4-sum.h"
+
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+    int s;
+
+    s = SUM(98, 1024);
+    printf("%d\n", s);
+    return (0);
+}
+julien@ubuntu:~/0x0c. macro, structures$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 4-main.c -o e
+julien@ubuntu:~/0x0c. macro, structures$ ./e
+1122
+julien@ubuntu:~/0x0c. macro, structures$
+
+```
+
+**Repo:**
+
+-   GitHub repository: `alx-low_level_programming`
+-   Directory: `0x0D-preprocessor`
+-   File: `4-sum.h`
