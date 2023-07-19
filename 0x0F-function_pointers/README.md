@@ -1,33 +1,32 @@
-0x0E. C - Structures, typedef
-=============================
+0x0F. C - Function pointers
+===========================
 
 -   By NeMualu
-
-
-![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2021/3/50af78a28a081e809856d4cdbde2d7ca9d4aa93d.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU65GPZGY3%2F20210927%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210927T115814Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=0158eddf0bf8015b6b59f632a1f63a2db9337f476ec9a445b33187a425b611da)
+-   Ongoing project - started 09-29-2021, must end by 09-30-2021 (in about 18 hours) - you're done with 0% of tasks.
+-   Checker will be released at 09-29-2021 06:00 PM
+-   QA review fully automated.
 
 Resources
 ---------
 
 **Read or watch**:
 
--   [0x0d. Structures.pdf](https://alx-intranet.hbtn.io/rltoken/giS4eNQT2BQ9RLK0PMhgJQ "0x0d. Structures.pdf")
--   [struct (C programming language)](https://alx-intranet.hbtn.io/rltoken/MinJEDOHpeZs31qaXU8v1w "struct (C programming language)")
--   [Documentation: structures](https://alx-intranet.hbtn.io/rltoken/GiGFlaP5uUxeWLwfzdH15w "Documentation: structures")
--   [0x0d. Typedef and structures.pdf](https://alx-intranet.hbtn.io/rltoken/TGQ3RopVP7CjUTzF-XDXUw "0x0d. Typedef and structures.pdf")
--   [typedef](https://alx-intranet.hbtn.io/rltoken/aqqM2t7PLG5cyHaKwm5nBg "typedef")
--   **Programming in C** by Stephen Kochan - *Chapter 8, Working with Structures p163-189*
--   [The Lost Art of C Structure Packing](https://alx-intranet.hbtn.io/rltoken/emb4ohNT7XKi8Peep5lyeA "The Lost Art of C Structure Packing") (*Advanced - not mandatory*)
+-   [Function Pointer in C](https://alx-intranet.hbtn.io/rltoken/yt8Q9jxzT_gyRAvnNkAgkw "Function Pointer in C")
+-   [Pointers to functions](https://alx-intranet.hbtn.io/rltoken/wP-yWvo9IqbcQsywMmh_iQ "Pointers to functions")
+-   [Function Pointers in C / C++](https://alx-intranet.hbtn.io/rltoken/dAN27S1yyBPeBa8RGfvPNA "Function Pointers in C / C++")
+-   [why pointers to functions?](https://alx-intranet.hbtn.io/rltoken/1vvWpH9Ux8axOLc9jPWcMw "why pointers to functions?")
+-   [Everything you need to know about pointers in C](https://alx-intranet.hbtn.io/rltoken/G_0lQzs4LAd1e5tKhNMPiw "Everything you need to know about pointers in C")
 
 Learning Objectives
 -------------------
 
-At the end of this project, you are expected to be able to [explain to anyone](https://alx-intranet.hbtn.io/rltoken/SvLTq6wdI89u7KDIiZzocg "explain to anyone"), **without the help of Google**:
+At the end of this project, you are expected to be able to [explain to anyone](https://alx-intranet.hbtn.io/rltoken/k0azA8UvMNuoAq5DODHvdw "explain to anyone"), **without the help of Google**:
 
 ### General
 
--   What are structures, when, why and how to use them
--   How to use `typedef`
+-   What are function pointers and how to use them
+-   What does a function pointer exactly hold
+-   Where does a function pointer point to in the virtual memory
 
 Requirements
 ------------
@@ -41,29 +40,63 @@ Requirements
 -   Your code should use the `Betty` style. It will be checked using [betty-style.pl](https://github.com/holbertonschool/Betty/blob/master/betty-style.pl "betty-style.pl") and [betty-doc.pl](https://github.com/holbertonschool/Betty/blob/master/betty-doc.pl "betty-doc.pl")
 -   You are not allowed to use global variables
 -   No more than 5 functions per file
--   The only C standard library functions allowed are `printf`, `malloc`, `free` and `exit`.
+-   The only C standard library functions allowed are `malloc`, `free` and `exit`. Any use of functions like `printf`, `puts`, `calloc`, `realloc` etc... is forbidden
+-   You are allowed to use [_putchar](https://github.com/holbertonschool/_putchar.c/blob/master/_putchar.c "_putchar")
+-   You don't have to push `_putchar.c`, we will use our file. If you do it won't be taken into account
 -   In the following examples, the `main.c` files are shown as examples. You can use them to test your functions, but you don't have to push them to your repo (if you do we won't take them into account). We will use our own `main.c` files at compilation. Our `main.c` files might be different from the one shown in the examples
+-   The prototypes of all your functions and the prototype of the function `_putchar` should be included in your header file called `function_pointers.h`
 -   Don't forget to push your header file
 -   All your header files should be include guarded
+
+
 Tasks
------
-
-### 0\. Poppy
-
+0. What's my name
 mandatory
 
-![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2021/3/3b534d73d79949ef8b7535d462014518256953f2.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU65GPZGY3%2F20210927%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210927T115814Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=15974b53741f059d40e4a9bbac57ea8b8a42b55ad5ef57253789e6a0dc79fd9a)
+Write a function that prints a name.
 
-Define a new type `struct dog` with the following elements:
+    Prototype: void print_name(char *name, void (*f)(char *));
 
--   `name`, type = `char *`
--   `age`, type = `float`
--   `owner`, type = `char *`
-
-```
-julien@ubuntu:~/0x0d. structures, typedef$ cat 0-main.c
+julien@ubuntu:~/0x0e. Function pointers$ cat 0-main.c
 #include <stdio.h>
-#include "dog.h"
+#include "function_pointers.h"
+
+/**
+ * print_name_as_is - prints a name as is
+ * @name: name of the person
+ *
+ * Return: Nothing.
+ */
+void print_name_as_is(char *name)
+{
+    printf("Hello, my name is %s\n", name);
+}
+
+/**
+ * print_name_uppercase - print a name in uppercase
+ * @name: name of the person
+ *
+ * Return: Nothing.
+ */
+void print_name_uppercase(char *name)
+{
+    unsigned int i;
+
+    printf("Hello, my uppercase name is ");
+    i = 0;
+    while (name[i])
+    {
+        if (name[i] >= 'a' && name[i] <= 'z')
+        {
+            putchar(name[i] + 'A' - 'a');
+        }
+        else
+        {
+            putchar(name[i]);
+        }
+        i++;
+    }
+}
 
 /**
  * main - check the code
@@ -72,39 +105,57 @@ julien@ubuntu:~/0x0d. structures, typedef$ cat 0-main.c
  */
 int main(void)
 {
-    struct dog my_dog;
-
-    my_dog.name = "Poppy";
-    my_dog.age = 3.5;
-    my_dog.owner = "Bob";
-    printf("My name is %s, and I am %.1f :) - Woof!\n", my_dog.name, my_dog.age);
+    print_name("Bob", print_name_as_is);
+    print_name("Bob Dylan", print_name_uppercase);
+    printf("\n");
     return (0);
 }
-julien@ubuntu:~/0x0d. structures, typedef$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 0-main.c -o a
-julien@ubuntu:~/0x0d. structures, typedef$ ./a
-My name is Poppy, and I am 3.5 :) - Woof!
-julien@ubuntu:~/0x0d. structures, typedef$
+julien@ubuntu:~/0x0e. Function pointers$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 0-main.c 0-print_name.c -o a
+julien@ubuntu:~/0x0e. Function pointers$ ./a 
+Hello, my name is Bob
+Hello, my uppercase name is BOB DYLAN
+julien@ubuntu:~/0x0e. Function pointers$ 
 
-```
+Repo:
 
-**Repo:**
+    GitHub repository: alx-low_level_programming
+    Directory: 0x0F-function_pointers
+    File: 0-print_name.c
 
--   GitHub repository: `alx-low_level_programming`
--   Directory: `0x0E-structures_typedef`
--   File: `dog.h`
-
-### 1\. A dog is the only thing on earth that loves you more than you love yourself
-
+1. If you spend too much time thinking about a thing, you'll never get it done
 mandatory
 
-Write a function that initialize a variable of type `struct dog`
+Write a function that executes a function given as a parameter on each element of an array.
 
--   Prototype: `void init_dog(struct dog *d, char *name, float age, char *owner);`
+    Prototype: void array_iterator(int *array, size_t size, void (*action)(int));
+    where size is the size of the array
+    and action is a pointer to the function you need to use
 
-```
-julien@ubuntu:~/0x0d. structures, typedef$ cat 1-main.c
+julien@ubuntu:~/0x0e. Function pointers$ cat 1-main.c
 #include <stdio.h>
-#include "dog.h"
+#include "function_pointers.h"
+
+/**
+ * print_elem - prints an integer
+ * @elem: the integer to print
+ *
+ * Return: Nothing.
+ */
+void print_elem(int elem)
+{
+    printf("%d\n", elem);
+}
+
+/**
+ * print_elem_hex - prints an integer, in hexadecimal
+ * @elem: the integer to print
+ *
+ * Return: Nothing.
+ */
+void print_elem_hex(int elem)
+{
+    printf("0x%x\n", elem);
+}
 
 /**
  * main - check the code
@@ -113,43 +164,81 @@ julien@ubuntu:~/0x0d. structures, typedef$ cat 1-main.c
  */
 int main(void)
 {
-    struct dog my_dog;
+    int array[5] = {0, 98, 402, 1024, 4096};
 
-    init_dog(&my_dog, "Poppy", 3.5, "Bob");
-    printf("My name is %s, and I am %.1f :) - Woof!\n", my_dog.name, my_dog.age);
+    array_iterator(array, 5, &print_elem);
+    array_iterator(array, 5, &print_elem_hex);
     return (0);
 }
-julien@ubuntu:~/0x0d. structures, typedef$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 1-main.c 1-init_dog.c -o b
-julien@ubuntu:~/0x0d. structures, typedef$ ./b
-My name is Poppy, and I am 3.5 :) - Woof!
-julien@ubuntu:~/0x0d. structures, typedef$
+julien@ubuntu:~/0x0e. Function pointers$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 1-main.c 1-array_iterator.c -o b
+julien@ubuntu:~/0x0e. Function pointers$ ./b 
+0
+98
+402
+1024
+4096
+0x0
+0x62
+0x192
+0x400
+0x1000
+julien@ubuntu:~//0x0e. Function pointers$ 
 
-```
+Repo:
 
-**Repo:**
+    GitHub repository: alx-low_level_programming
+    Directory: 0x0F-function_pointers
+    File: 1-array_iterator.c
 
--   GitHub repository: `alx-low_level_programming`
--   Directory: `0x0E-structures_typedef`
--   File: `1-init_dog.c`
-
-### 2\. A dog will teach you unconditional love. If you can have that in your life, things won't be too bad
-
+2. To hell with circumstances; I create opportunities
 mandatory
 
-![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2021/3/bb940d2ab10c3a4740f3c154cb980133e65e438e.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU65GPZGY3%2F20210927%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210927T115814Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=7b1af8bf61e4886bb5b5a0e97e271312f82966326b6d2a2f15041c6fd417b106)
+Write a function that searches for an integer.
 
-Write a function that prints a `struct dog`
+    Prototype: int int_index(int *array, int size, int (*cmp)(int));
+    where size is the number of elements in the array array
+    cmp is a pointer to the function to be used to compare values
+    int_index returns the index of the first element for which the cmp function does not return 0
+    If no element matches, return -1
+    If size <= 0, return -1
 
--   Prototype: `void print_dog(struct dog *d);`
--   Format: see example bellow
--   You are allowed to use the standard library
--   If an element of `d` is `NULL`, print `(nil)` instead of this element. (if `name` is `NULL`, print `Name: (nil)`)
--   If `d` is `NULL` print nothing.
-
-```
-julien@ubuntu:~/0x0d. structures, typedef$ cat 2-main.c
+julien@ubuntu:~/0x0e. Function pointers$ cat 2-main.c
 #include <stdio.h>
-#include "dog.h"
+#include "function_pointers.h"
+
+/**
+ * is_98 - check if a number is equal to 98
+ * @elem: the integer to check
+ *
+ * Return: 0 if false, something else otherwise.
+ */
+int is_98(int elem)
+{
+    return (98 == elem);
+}
+
+/**
+ * is_strictly_positive - check if a number is greater than 0
+ * @elem: the integer to check
+ *
+ * Return: 0 if false, something else otherwise.
+ */
+int is_strictly_positive(int elem)
+{
+    return (elem > 0);
+}
+
+
+/**
+ * abs_is_98 - check if the absolute value of a number is 98
+ * @elem: the integer to check
+ *
+ * Return: 0 if false, something else otherwise.
+ */
+int abs_is_98(int elem)
+{
+    return (elem == 98 || -elem == 98);
+}
 
 /**
  * main - check the code
@@ -158,167 +247,194 @@ julien@ubuntu:~/0x0d. structures, typedef$ cat 2-main.c
  */
 int main(void)
 {
-    struct dog my_dog;
+    int array[20] = {0, -98, 98, 402, 1024, 4096, -1024, -98, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 98};
+    int index;
 
-    my_dog.name = "Poppy";
-    my_dog.age = 3.5;
-    my_dog.owner = "Bob";
-    print_dog(&my_dog);
+    index = int_index(array, 20, is_98);
+    printf("%d\n", index);
+    index = int_index(array, 20, abs_is_98);
+    printf("%d\n", index);
+    index = int_index(array, 20, is_strictly_positive);
+    printf("%d\n", index);
     return (0);
 }
-julien@ubuntu:~/0x0d. structures, typedef$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 2-main.c 2-print_dog.c -o c
-julien@ubuntu:~/0x0d. structures, typedef$ ./c
-Name: Poppy
-Age: 3.500000
-Owner: Bob
-julien@ubuntu:~/0x0d. structures, typedef$
+julien@ubuntu:~/0x0e. Function pointers$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 2-main.c 2-int_index.c -o c
+julien@ubuntu:~/0x0e. Function pointers$ ./c 
+2
+1
+2
+julien@ubuntu:~/0x0e. Function pointers$ 
 
-```
+Repo:
 
-**Repo:**
+    GitHub repository: alx-low_level_programming
+    Directory: 0x0F-function_pointers
+    File: 2-int_index.c
 
--   GitHub repository: `alx-low_level_programming`
--   Directory: `0x0E-structures_typedef`
--   File: `2-print_dog.c`
-
-### 3\. Outside of a dog, a book is a man's best friend. Inside of a dog it's too dark to read
-
+3. A goal is not always meant to be reached, it often serves simply as something to aim at
 mandatory
 
-![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2021/3/9ef84b3fd1636992602868e45d3062719326de0e.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU65GPZGY3%2F20210927%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210927T115814Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=982ebe4952d4ed369adad65d76e68662ec6f229f91eb5c6daaec764c2ce63971)
+Write a program that performs simple operations.
 
-Define a new type `dog_t` as a new name for the type `struct dog`.
+    You are allowed to use the standard library
+    Usage: calc num1 operator num2
+    You can assume num1 and num2 are integers, so use the atoi function to convert them from the string input to int
+    operator is one of the following:
+        +: addition
+        -: subtraction
+        *: multiplication
+        /: division
+        %: modulo
+    The program prints the result of the operation, followed by a new line
+    You can assume that the result of all operations can be stored in an int
+    if the number of arguments is wrong, print Error, followed by a new line, and exit with the status 98
+    if the operator is none of the above, print Error, followed by a new line, and exit with the status 99
+    if the user tries to divide (/ or %) by 0, print Error, followed by a new line, and exit with the status 100
 
-```
-julien@ubuntu:~/0x0d. structures, typedef$ cat 3-main.c
-#include <stdio.h>
-#include "dog.h"
+This task requires that you create four different files.
+
+3-calc.h
+
+This file should contain all the function prototypes and data structures used by the program. You can use this structure:
 
 /**
- * main - check the code
+ * struct op - Struct op
  *
- * Return: Always 0.
+ * @op: The operator
+ * @f: The function associated
  */
-int main(void)
+typedef struct op
 {
-    dog_t my_dog;
+    char *op;
+    int (*f)(int a, int b);
+} op_t;
 
-    my_dog.name = "Poppy";
-    my_dog.age = 3.5;
-    my_dog.owner = "Bob";
-    printf("My name is %s, and I am %.1f :) - Woof!\n", my_dog.name, my_dog.age);
-    return (0);
-}
-julien@ubuntu:~/0x0d. structures, typedef$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 3-main.c -o d
-julien@ubuntu:~/0x0d. structures, typedef$ ./d
-My name is Poppy, and I am 3.5 :) - Woof!
-julien@ubuntu:~/0x0d. structures, typedef$
+3-op_functions.c
+
+This file should contain the 5 following functions (not more):
+
+    op_add: returns the sum of a and b. Prototype: int op_add(int a, int b);
+    op_sub: returns the difference of a and b. Prototype: int op_sub(int a, int b);
+    op_mul: returns the product of a and b. Prototype: int op_mul(int a, int b);
+    op_div: returns the result of the division of a by b. Prototype: int op_div(int a, int b);
+    op_mod: returns the remainder of the division of a by b. Prototype: int op_mod(int a, int b);
+
+3-get_op_func.c
+
+This file should contain the function that selects the correct function to perform the operation asked by the user. You’re not allowed to declare any other function.
+
+    Prototype: int (*get_op_func(char *s))(int, int);
+    where s is the operator passed as argument to the program
+    This function returns a pointer to the function that corresponds to the operator given as a parameter. Example: get_op_func("+") should return a pointer to the function op_add
+    You are not allowed to use switch statements
+    You are not allowed to use for or do ... while loops
+    You are not allowed to use goto
+    You are not allowed to use else
+    You are not allowed to use more than one if statement in your code
+    You are not allowed to use more than one while loop in your code
+    If s does not match any of the 5 expected operators (+, -, *, /, %), return NULL
+    You are only allowed to declare these two variables in this function:
+
+    op_t ops[] = {
+        {"+", op_add},
+        {"-", op_sub},
+        {"*", op_mul},
+        {"/", op_div},
+        {"%", op_mod},
+        {NULL, NULL}
+    };
+    int i;
+
+3-main.c
+
+This file should contain your main function only.
+
+    You are not allowed to code any other function than main in this file
+    You are not allowed to directly call op_add, op_sub, op_mul, op_div or op_mod from the main function
+    You have to use atoi to convert arguments to int
+    You are not allowed to use any kind of loop
+    You are allowed to use a maximum of 3 if statements
+
+Compilation and examples
+
+julien@ubuntu:~/0x0e. Function pointers$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 3-main.c 3-op_functions.c 3-get_op_func.c -o calc
+julien@ubuntu:~/0x0e. Function pointers$ ./calc 1 + 1
+2
+julien@ubuntu:~/0x0e. Function pointers$ ./calc 97 + 1
+98
+julien@ubuntu:~/0x0e. Function pointers$ ./calc 1024 / 10
+102
+julien@ubuntu:~/0x0e. Function pointers$ ./calc 1024 '*' 98
+100352
+julien@ubuntu:~/0x0e. Function pointers$ ./calc 1024 '\*' 98
+Error
+julien@ubuntu:~/0x0e. Function pointers$ ./calc 1024 - 98
+926
+julien@ubuntu:~/0x0e. Function pointers$ ./calc 1024 '%' 98
+44
+julien@ubuntu:~/0x0e. Function pointers$ 
+
+Repo:
+
+    GitHub repository: alx-low_level_programming
+    Directory: 0x0F-function_pointers
+    File: 3-main.c, 3-op_functions.c, 3-get_op_func.c, 3-calc.h
+
+
+### 4\. Most hackers are young because young people tend to be adaptable. As long as you remain adaptable, you can always be a good hacker
+
+#advanced
+
+Score: 0.00% (Checks completed: 0.00%)
+
+Write a program that prints the [opcodes](https://alx-intranet.hbtn.io/rltoken/5eSu8Ohx0ddeNGmaeDo_zQ "opcodes") of its own main function.
+
+-   Usage: `./main number_of_bytes`
+-   Output format:
+    -   the opcodes should be printed in hexadecimal, lowercase
+    -   each opcode is two char long
+    -   listing ends with a new line
+    -   see example
+-   You are allowed to use `printf` and `atoi`
+-   You have to use `atoi` to convert the argument to an `int`
+-   If the number of argument is not the correct one, print `Error`, followed by a new line, and exit with the status `1`
+-   If the number of bytes is negative, print `Error`, followed by a new line, and exit with the status `2`
+-   You do not have to compile with any flags
+
+Note: if you want to translate your opcodes to assembly instructions, you can use, for instance [udcli](https://alx-intranet.hbtn.io/rltoken/J14-FI4TyhQWgX-aMh_Nnw "udcli").
 
 ```
+julien@ubuntu:~/0x0e. Function pointers$ gcc -std=gnu89 100-main_opcodes.c -o main
+julien@ubuntu:~/0x0e. Function pointers$ ./main 21
+55 48 89 e5 48 83 ec 30 89 7d dc 48 89 75 d0 83 7d dc 02 74 14
+julien@ubuntu:~/0x0e. Function pointers$ objdump -d -j.text -M intel main
+[...]
+00000000004005f6 <main>:
+  4005f6:   55                      push   rbp
+  4005f7:   48 89 e5                mov    rbp,rsp
+  4005fa:   48 83 ec 30             sub    rsp,0x30
+  4005fe:   89 7d dc                mov    DWORD PTR [rbp-0x24],edi
+  400601:   48 89 75 d0             mov    QWORD PTR [rbp-0x30],rsi
+  400605:   83 7d dc 02             cmp    DWORD PTR [rbp-0x24],0x2
+  400609:   74 14                   je     40061f <main+0x29>
+[...]
+julien@ubuntu:~/0x0e. Function pointers$ ./main 21 | udcli -64 -x -o 4005f6
+00000000004005f6 55               push rbp
+00000000004005f7 4889e5           mov rbp, rsp
+00000000004005fa 4883ec30         sub rsp, 0x30
+00000000004005fe 897ddc           mov [rbp-0x24], edi
+0000000000400601 488975d0         mov [rbp-0x30], rsi
+0000000000400605 837ddc02         cmp dword [rbp-0x24], 0x2
+0000000000400609 7414             jz 0x40061f
+julien@ubuntu:~/0x0e. Function pointers$
+
+```
+
+-   *Note 0: `je` is equivalent to `jz`*
+-   *Note 1: depending on how you write your `main` function, and on which machine you compile your program, the opcodes (and by extension the assembly code) might be different than the above example*
 
 **Repo:**
 
 -   GitHub repository: `alx-low_level_programming`
--   Directory: `0x0E-structures_typedef`
--   File: `dog.h`
-
-### 4\. A door is what a dog is perpetually on the wrong side of
-
-mandatory
-
-![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2021/3/8c1e394774fb8d25e0bbbb73a75ebc7de0c80745.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU65GPZGY3%2F20210927%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210927T115814Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=3fd6fcd462bf81857d3fe8899ce52bbb2d8b1e869f524b350a3ba285341c7adc)
-
-Write a function that creates a new dog.
-
--   Prototype: `dog_t *new_dog(char *name, float age, char *owner);`
--   You have to store a copy of `name` and `owner`
--   Return `NULL` if the function fails
-
-```
-julien@ubuntu:~/0x0d. structures, typedef$ cat 4-main.c
-#include <stdio.h>
-#include "dog.h"
-
-/**
- * main - check the code
- *
- * Return: Always 0.
- */
-int main(void)
-{
-    dog_t *my_dog;
-
-    my_dog = new_dog("Poppy", 3.5, "Bob");
-    printf("My name is %s, and I am %.1f :) - Woof!\n", my_dog->name, my_dog->age);
-    return (0);
-}
-julien@ubuntu:~/0x0d. structures, typedef$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 4-main.c 4-new_dog.c -o e
-julien@ubuntu:~/0x0d. structures, typedef$ ./e
-My name is Poppy, and I am 3.5 :) - Woof!
-julien@ubuntu:~/0x0d. structures, typedef$
-
-```
-
-**Repo:**
-
--   GitHub repository: `alx-low_level_programming`
--   Directory: `0x0E-structures_typedef`
--   File: `4-new_dog.c`
-
-### 5\. How many legs does a dog have if you call his tail a leg? Four. Saying that a tail is a leg doesn't make it a leg
-
-mandatory
-
-![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2021/3/683112dbdd805c36a9b366cede0653dd80da5ec3.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOU65GPZGY3%2F20210927%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210927T115814Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=894938711e5d339e72220eaad16bdd522155e77fc83b3c208a030033458f89d0)
-
-Write a function that frees dogs.
-
--   Prototype: `void free_dog(dog_t *d);`
-
-```
-julien@ubuntu:~/0x0d. structures, typedef$ cat 5-main.c
-#include <stdio.h>
-#include "dog.h"
-
-/**
- * main - check the code
- *
- * Return: Always 0.
- */
-int main(void)
-{
-    dog_t *my_dog;
-
-    my_dog = new_dog("Poppy", 3.5, "Bob");
-    printf("My name is %s, and I am %.1f :) - Woof!\n", my_dog->name, my_dog->age);
-    free_dog(my_dog);
-    return (0);
-}
-julien@ubuntu:~/0x0d. structures, typedef$ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 5-main.c 5-free_dog.c 4-new_dog.c -o f
-julien@ubuntu:~/0x0d. structures, typedef$ valgrind ./f
-==22840== Memcheck, a memory error detector
-==22840== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==22840== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==22840== Command: ./f
-==22840==
-My name is Poppy, and I am 3.5 :) - Woof!
-==22840==
-==22840== HEAP SUMMARY:
-==22840==     in use at exit: 0 bytes in 0 blocks
-==22840==   total heap usage: 4 allocs, 4 frees, 1,059 bytes allocated
-==22840==
-==22840== All heap blocks were freed -- no leaks are possible
-==22840==
-==22840== For counts of detected and suppressed errors, rerun with: -v
-==22840== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-julien@ubuntu:~/0x0d. structures, typedef$
-
-```
-
-**Repo:**
-
--   GitHub repository: `alx-low_level_programming`
--   Directory: `0x0E-structures_typedef`
--   File: `5-free_dog.c`
-
-Copyright © 2021 Holberton Inc, All rights reserved.
+-   Directory: `0x0F-function_pointers`
+-   File: `100-main_opcodes.c`
