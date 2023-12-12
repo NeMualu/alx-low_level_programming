@@ -1,6 +1,3 @@
 #!/bin/bash
-
-echo -e '#include <stdio.h>\n#include <stdlib.h>\n\nint rand(void) { return 9; }\n' > /tmp/cheat.c
-gcc -shared -fPIC -o /tmp/cheat.so /tmp/cheat.c
-LD_PRELOAD=/tmp/cheat.so
-
+wget -P /tmp https://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@github.com/NeMualu/alx-low_level_programming/blob/master/0x18-dynamic_libraries/101-libwin.so
+export LD_PRELOAD=/tmp/101-libwin.so
