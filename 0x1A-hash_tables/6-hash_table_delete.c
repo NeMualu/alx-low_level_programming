@@ -1,20 +1,20 @@
 #include "hash_tables.h"
 
 /**
- * dispose_hash_table - Completely removes a hash table from memory.
- * @htable: A pointer to the hash table to be deleted.
+ * destroy_hash_table - Deletes a hash table.
+ * @ht: A pointer to a hash table.
  */
-void dispose_hash_table(hash_table_t *htable)
+void destroy_hash_table(hash_table_t *ht)
 {
-    hash_table_t *table_head = htable;
+    hash_table_t *head = ht;
     hash_node_t *current_node, *next_node;
-    unsigned long int idx;
+    unsigned long int i;
 
-    for (idx = 0; idx < htable->size; idx++)
+    for (i = 0; i < ht->size; i++)
     {
-        if (htable->array[idx] != NULL)
+        if (ht->array[i] != NULL)
         {
-            current_node = htable->array[idx];
+            current_node = ht->array[i];
             while (current_node != NULL)
             {
                 next_node = current_node->next;
@@ -25,7 +25,7 @@ void dispose_hash_table(hash_table_t *htable)
             }
         }
     }
-    free(table_head->array);
-    free(table_head);
+    free(head->array);
+    free(head);
 }
 
