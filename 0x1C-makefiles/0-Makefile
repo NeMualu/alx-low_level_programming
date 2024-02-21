@@ -1,2 +1,5 @@
-all : main.c holberton.c m.h
-	 gcc main.c holberton.c -o holberton
+school: 
+    gcc -o school your_source_file.c
+
+all: school
+

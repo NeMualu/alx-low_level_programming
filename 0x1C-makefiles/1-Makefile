@@ -1,5 +1,9 @@
 CC = gcc
-SRC = main.c holberton.c
+SRC = your_source_file.c
+EXECUTABLE = school
 
-all : $(SRC) m.h
-	$(CC) $(SRC) -o holberton
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(SRC)
+	$(CC) -o $(EXECUTABLE) $(SRC)
+
