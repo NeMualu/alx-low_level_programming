@@ -1,5 +1,3 @@
 school: 
-    gcc -o school your_source_file.c
-
+	gcc -o school your_source_file.c
 all: school
-
