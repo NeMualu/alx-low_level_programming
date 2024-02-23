@@ -1,34 +1,40 @@
 #!/usr/bin/python3
+"""
+Function Island perimeter
+"""
+
 
 def island_perimeter(grid):
     """
-    Returns the perimeter of the island described in grid.
-
-    Args:
-        grid (list): List of lists of integers representing the island.
-
-    Returns:
-        int: Perimeter of the island.
-
-    Description:
-        Traverse the land mass and for each land cell,
-        check its neighbors to calculate the total perimeter.
-
+    Argument is a grid
+    Sum side x  row by row and find the max value
+    Sum side y column by column and find the max value
+    Return the parameter
     """
-    perimeter = 0
-
-    for row in range(len(grid)):
-        for col in range(len(grid[0])):
-            if grid[row][col] == 1:
-                perimeter += 4  # Each land cell contributes 4 to the perimeter
-
-                # Check left neighbor
-                if col > 0 and grid[row][col - 1] == 1:
-                    perimeter -= 2  # Deduct 2 for shared edge with left neighbor
-
-                # Check top neighbor
-                if row > 0 and grid[row - 1][col] == 1:
-                    perimeter -= 2  # Deduct 2 for shared edge with top neighbor
-
-    return perimeter
-
+    width = []
+    height = []
+    per = 0
+    for x in range(len(grid)):
+        w = 0
+        for y in range(len(grid[0])):
+            if grid[x][y] is 1:
+                w = w + grid[x][y]
+        width.append(w)
+    for x in range(len(grid[0])):
+        h = 0
+        for y in range(len(grid)):
+            if grid[y][x] is 1:
+                h = h + grid[y][x]
+        height.append(h)
+    h = max(height)
+    w = max(width)
+    if h == 1 and w == 1:
+        per = 1
+    else:
+        if h == 1:
+            per = w
+        elif w == 1:
+            per = h
+        else:
+            per = 2 * (h + w)
+    return per
