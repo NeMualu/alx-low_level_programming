@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Function Island perimeter
 """
-
-
 def island_perimeter(grid):
     """
     Returns the perimeter of the island described in grid.
@@ -17,6 +15,7 @@ def island_perimeter(grid):
     Description:
         Traverse the land mass and for each land cell,
         check its neighbors to calculate the total perimeter.
+
     """
     perimeter = 0
 
@@ -34,4 +33,3 @@ def island_perimeter(grid):
                     perimeter -= 2  # Deduct 2 for shared edge with top neighbor
 
     return perimeter
-
