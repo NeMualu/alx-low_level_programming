@@ -1,31 +1,34 @@
-CC = gcc
+C = gcc
 SRC = main.c school.c
 OBJ = $(SRC:.c=.o)
 NAME = school
-RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -pedantic
+RM := rm -f
+CFLAGS := -Wall -Werror -Wextra -pedantic
+DEPS = $(SRC:.c=.d)
 
 .PHONY: all clean oclean fclean re
 
 all: $(NAME)
 
+-include $(DEPS)
+
 $(NAME): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
--include $(SRC:.c=.d)
-
 %.o: %.c
-	$(CC) -c $< -o $@ $(CFLAGS)
-	$(CC) -MM $< > $*.d
 
 clean:
-	$(RM) *~ $(NAME)
+	-$(RM) *~ $(NAME)
 
 oclean:
-	$(RM) $(OBJ)
+	-$(RM) $(OBJ)
 
 fclean: clean oclean
-	$(RM) $(NAME)
+	-$(RM) $(NAME)
 
 re: fclean all
+
+ifneq ($(wildcard m.h),)
+include $(DEPS)
+endif
 
