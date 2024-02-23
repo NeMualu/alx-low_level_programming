@@ -1,5 +1,5 @@
 CC = gcc
-SRC = your_source_file.c
+SRC = school.c main.c
 EXECUTABLE = school
 
 all: $(EXECUTABLE)
